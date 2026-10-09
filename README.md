@@ -17,7 +17,7 @@
 
 ### 1. Dataset
 
-~1,500 digital transactions from 20 customers of a UK neobank, January to May 2026 (H1 2026 brief). Star schema: one fact table, three dimension tables, plus an Extended Calendar table (`dim_date`) for time analysis.
+~1,500 digital transactions from 20 customers of a UK neobank, January to May 2026 (H1 2026 brief). Star schema: one fact table, three dimension tables
 
 ```mermaid
 erDiagram
@@ -191,8 +191,6 @@ Drill-through page: review one customer's transactions, flags, fees, and status 
 <img width="1255" height="692" alt="image" src="https://github.com/user-attachments/assets/11e5fe45-22e5-4f73-b48a-cddf6f78ac7b" />
 
 ## IV. Insight and Recommendation
-
-> All rates come from a small sample (~1,500 transactions, 20 customers). Treat them as hypotheses until confirmed with transaction counts.
 
 ### 1. Executive Overview
 
