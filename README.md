@@ -208,7 +208,7 @@ Drill-through page: review one customer's transactions, flags, fees, and status 
 - **Declared `risk_flag` labels are misaligned with actual fraud outcomes.** High (19.9%), Medium (22.3%), and Low (19.0%) are nearly identical.
 - **Half of flagged transactions come from Unknown device.**
 - **No strong day or time pattern.** Only Monday morning (38%) and Friday evening (36%) stand out, and small cell sizes make even these tentative.
-- **Rajan Mehta generates the most risk.** The nine largest flagged transactions all belong to this one Premium customer and repeat the same amounts. This may be an artefact of the synthetic dataset.
+- **Rajan Mehta generates the most risk.** The nine largest flagged transactions all belong to this one Premium customer and repeat the same amounts. 
 - **KYC:** only 4 customers are currently unverified, so results are not statistically significant. A 0% fraud rate among non-KYC customers does not mean low risk. Compliance must still remediate all 4 non-KYC accounts.
 
 ### 3. Finance
