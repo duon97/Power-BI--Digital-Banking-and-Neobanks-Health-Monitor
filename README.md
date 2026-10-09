@@ -11,7 +11,6 @@
 - [III. Visualization](#iii-visualization)
 - [IV. Insight and Recommendation](#iv-insight-and-recommendation)
 - [V. Recommendations](#v-recommendations)
-- [VI. Limitations and To Validate](#vi-limitations-and-to-validate)
 - [Tech Stack](#tech-stack)
 
 ## I. Introduction
