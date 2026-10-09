@@ -93,7 +93,7 @@ erDiagram
 
 Build a decision-making dashboard to:
 
-- Monitor transaction health (completion, decline, and reversal rates)
+- Monitor transaction health (Total Transaction, Trnsaction Value, Completion, Failed rates)
 - Locate fraud exposure by segment, merchant category, customer, and time
 - Detect fee billing errors (under-collection and overcharging)
 - Check whether declared risk ratings match actual fraud outcomes
@@ -120,8 +120,8 @@ North star metrics
 
 | Area | Metrics |
 |---|---|
-| Transaction health | Completion Rate, Failed Rate (Declined + Reversed) |
-| Fraud and risk | Fraud Flag Rate, Risk Exposure |
+| Transaction health | Total Transaction, Transaction Value, Completion Rate, Failed Rate (Declined + Reversed) |
+| Fraud and risk | Fraud Flag Rate |
 | Revenue health | Fee Revenue, Revenue Leakage |
 
 ### Step 3: Ideate
@@ -141,47 +141,55 @@ Chart types matched to each question: line charts for trends, bar charts for mut
 - How have transaction count and value trended month-on-month?
 - What is the status mix (Completed, Declined, Pending, Reversed)?
 - Which channels carry the most transaction value?
+- Which UK regions generate the most transaction activity, and where are fraud events concentrated?
 - Which segments drive the highest values?
+- Do unverified (non-KYC) customers show disproportionate rates of fraud-flagged transactions?
 
-![Executive Overview](images/overview.png)
+<img width="1423" height="732" alt="image" src="https://github.com/user-attachments/assets/736fcfab-5504-42ef-acb3-b2e93647bd84" />
+
 
 ### Risk
 
 *Where does fraud concentrate?*
 
-- What share of transactions is flagged, and how does it trend?
-- Which segments, merchant categories, and devices show the highest fraud rates?
-- Is there a day-of-week or time-of-day pattern?
-- Does declared `risk_flag` match actual fraud rates?
-- Which transactions carry the highest exposure?
+- What is the Fraud Rate Trend ?
+- Fraud Rate across customer_segment ?
+- What percentage of all transactions were flagged as fraudulent, and how does this vary by merchant category?
+- Fraud Rate through device_type ?
+- Is there a day-of-week or time-of-day pattern in high-risk transactions?
+- Do fraud-flagged transactions correlate with non-KYC-verified customers?
 
-![Risk](images/risk.png)
+<img width="1250" height="707" alt="image" src="https://github.com/user-attachments/assets/da7ea52a-c01f-43ea-b072-b0cfbf0f0d6a" />
 
-### Finance
+### Fee Revenue and Leakage 
 
 *Are we collecting the right fees?*
 
-- What is total fee revenue, and which transaction types contribute most?
-- Where are fees under-collected (including waivers) or overcharged?
-- Which segments generate the highest fee revenue per transaction?
+- What is the fee revenue trend ?
+- Which transaction types contribute Fee revenue the most ?
+- Are there transaction type or merchant categories where actual fees charged deviate from the typical fee - suggesting waivers or errors?
+- Which customer segments generate the highest fee revenue per transaction?
+- Which transaction type contribute the most ?(Domestic or  International ?)
 
-![Finance](images/finance.png)
+<img width="1243" height="742" alt="image" src="https://github.com/user-attachments/assets/b50647ce-2539-4d36-8ea1-f8a54103d05e" />
 
-### Product
+### Product and Operation
 
 *Where do transactions fail?*
 
-- Which channels and transaction types have the highest failure rates?
-- Which devices are associated with the most failed transactions?
-- Do ATM reversals or international declines point to a systemic issue?
+- Which channel fails most?
+- Which transaction types fail most?
+- Do international transactions fail more than domestic?
+- How does device usage differ by segment and Which devices see the most failures?
+- Are channel failures Declines or Reversals?
 
-![Product](images/product.png)
+<img width="1247" height="675" alt="image" src="https://github.com/user-attachments/assets/fd985429-01ea-4941-baec-7de3680bec37" />
 
 ### Customer Investigation
 
 Drill-through page: review one customer's transactions, flags, fees, and status in every dimension.
 
-![Customer Investigation](images/customer.png)
+<img width="1255" height="692" alt="image" src="https://github.com/user-attachments/assets/11e5fe45-22e5-4f73-b48a-cddf6f78ac7b" />
 
 ## IV. Insight and Recommendation
 
@@ -189,38 +197,42 @@ Drill-through page: review one customer's transactions, flags, fees, and status 
 
 ### 1. Executive Overview
 
-- **Activity is stable month to month.** Monthly count stays between 279 and 322 with no clear trend. Status mix is steady: about 35% Declined, 25% Pending, 25% Reversed, 15% Completed.
-- **Value is concentrated.** Premium accounts for 63% of transaction value (£1.20M); Standard, Starter, and Business hold 14%, 13%, and 9%. Automated and Mobile App channels carry about 43% and 36% of value.
+- **Transaction value rose 48.4% versus April, driven by higher activity among Standard clients.**
+- **The Automated channel leads with 42.83% of total transaction value.**
+- **Premium drives the highest transaction volume and value** (63% of total value).
 
 ### 2. Risk
 
-- **Fraud is steady at about 20%.** 300 of ~1,500 transactions are flagged, with no sustained trend. April dips to about 13%, May rebounds to about 23%.
-- **Declared risk ratings do not match actual fraud.** High (19.9%), Medium (22.3%), and Low (19.0%) are nearly identical. Fraud by merchant category splits into two clusters (about 30% and about 11%), so the data supports two tiers, not three.
-- **Premium has the highest fraud rate (40%) and the largest exposure.** Flagged exposure is £1.19M, which suggests fraud skews toward large transactions.
-- **Risk is concentrated in individual customers.** The nine largest flagged transactions belong to one Premium customer, are all Reversed, and repeat the same amounts (£17,273 six times, £16,818 three times). They total about £154K, roughly 13% of exposure. This pattern may be an artefact of the synthetic dataset.
-- **No strong time pattern.** Day and time-of-day fraud rates mostly fall within 12 to 27%. Monday morning (38%) and Friday evening (36%) stand out, but cell sizes are small.
+- **London accounts for 60% of all fraud flags** (225 flagged transactions). Investigate this cluster.
+- **Premium has the highest fraud rate (40%) and also 63% of value**, so it carries the largest exposure.
+- **Merchant categories form two clusters.** Nine categories sit at about 29-31% fraud rate, so Gambling is no worse than Fuel or Electronics.
+- **Declared `risk_flag` labels are misaligned with actual fraud outcomes.** High (19.9%), Medium (22.3%), and Low (19.0%) are nearly identical.
+- **Half of flagged transactions come from Unknown device.**
+- **No strong day or time pattern.** Only Monday morning (38%) and Friday evening (36%) stand out, and small cell sizes make even these tentative.
+- **Rajan Mehta generates the most risk.** The nine largest flagged transactions all belong to this one Premium customer and repeat the same amounts. This may be an artefact of the synthetic dataset.
+- **KYC:** only 4 customers are currently unverified, so results are not statistically significant. A 0% fraud rate among non-KYC customers does not mean low risk. Compliance must still remediate all 4 non-KYC accounts.
 
 ### 3. Finance
 
-- **Fee errors run in both directions and cancel out.** About £587 is under-collected (78% of the £750 expected) while a similar amount is overcharged. Net fee revenue is £750.17 against £750.00 expected, so the total looks correct and hides the errors.
+- **Fee errors run in both directions and cancel out.** About £587 is under-collected (78% of the £750 expected fees) while a similar amount is overcharged, so net revenue (£750.17 vs £750.00 expected) hides the errors.
+- **Transfer - International accounts for the largest fee variance (-£400)** and contributes disproportionately to fee leakage.
+- **ATM Withdrawals and Crypto Purchases also deviate from expected fees** (consistently under-collected).
+- **Business customers generate the highest fee revenue per transaction (£0.90 - £1.20).**
 
 ### 4. Product
 
-- **Failure is common.** Declined and Reversed together make up about 60% of transactions (900 of 1,500), far above what a healthy bank would show. This likely reflects how the synthetic data was generated.
+- **The failure rate is about 60% across the board, consistent across every channel and failure type.** For a real bank this level would be unacceptable (likely an artefact of the synthetic data).
+- **Failure is highest for recurring and automated types** (Card Refund, Loan Repayment, Standing Order at about 75%).
 
 ## V. Recommendations
 
-1. **Investigate the highest-exposure customer first.** Check whether one customer explains Premium's 63% value share and 40% fraud rate. Split exposure into Completed + flagged (potential loss) and Reversed + flagged (blocked).
-2. **Re-tier merchant risk ratings using observed fraud rates.** Check which categories rated Low or Medium sit in the 30% cluster (Fuel is highest at 31%).
-3. **Fix fee billing in both directions.** Recover the £587 under-collected and refund the overcharges. Do not recover only the shortfall.
-
-## VI. Limitations and To Validate
-
-- Synthetic data: ~1,500 rows expanded from 20 seed rows, so repeated amounts and uniform rates may be artefacts.
-- Reconcile flagged counts across pages (300 overall versus any month-filtered card).
-- Confirm segment-level failure rates (for example Business) after removing all filters, with n shown.
-- Add a KYC-verified versus non-verified fraud comparison; no page covers it yet.
-- Compare the device mix of fraud against the device mix of all transactions.
+1. **Investigate the London fraud cluster** (60% fraud rate, 225 flagged), starting with Rajan Mehta, the highest-exposure customer.
+2. **Recover and correct fee leakage.** Recover £587 in under-collected fees (78% of expected fee revenue), and refund overcharges. Investigate International Transfers first (-£400).
+3. **Review fee configuration** for Transfer - International, ATM Withdrawals, and Crypto Purchases, where actual fees consistently deviate from expected fees.
+4. **Investigate the root cause of the platform-wide failure rate (about 60%),** starting with Card Refund, Loan Repayment, and Standing Order. Analyse `failed_reason` to determine whether failures stem from insufficient funds, fraud rules, or system processing errors, and review the shared transaction processing flow, since failures are not confined to a single channel.
+5. **Re-tier merchant risk ratings** using observed fraud rates, since declared `risk_flag` does not predict actual fraud.
+6. **Remediate all 4 non-KYC accounts,** regardless of their 0% observed fraud rate.
+7. **Prioritise Business customers for premium products,** as they generate the highest fee revenue per transaction.
 
 ## Tech Stack
 
