@@ -1,4 +1,4 @@
-# Zephyr Bank Transaction Analytics
+# Bank Transaction Analytics
 
 **Power BI dashboard** analyzing transaction health, fraud exposure, and fee revenue for a fictional UK neobank, built for Risk, Finance, Product, and Compliance teams.
 
