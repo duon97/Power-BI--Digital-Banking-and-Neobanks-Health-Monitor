@@ -207,44 +207,17 @@ Drill-through page: review one customer's transactions, flags, fees, and status 
 
 ## IV. Insight and Recommendation
 
-### 1. Executive Overview
+## Insights and Recommendations
 
-- **Transaction value rose 48.4% versus April, driven by higher activity among Standard clients.**
-- **The Automated channel leads with 42.83% of total transaction value.**
-- **Premium drives the highest transaction volume and value** (63% of total value).
-
-### 2. Risk
-
-- **London accounts for 60% of all fraud flags** (225 flagged transactions). Investigate this cluster.
-- **Premium has the highest fraud rate (40%) and also 63% of value**, so it carries the largest exposure.
-- **Merchant categories form two clusters.** Nine categories sit at about 29-31% fraud rate, so Gambling is no worse than Fuel or Electronics.
-- **Declared `risk_flag` labels are misaligned with actual fraud outcomes.** High (19.9%), Medium (22.3%), and Low (19.0%) are nearly identical.
-- **Half of flagged transactions come from Unknown device.**
-- **No strong day or time pattern.** Only Monday morning (38%) and Friday evening (36%) stand out, and small cell sizes make even these tentative.
-- **Rajan Mehta generates the most risk.** The nine largest flagged transactions all belong to this one Premium customer and repeat the same amounts. 
-- **KYC:** only 4 customers are currently unverified, so results are not statistically significant. A 0% fraud rate among non-KYC customers does not mean low risk. Compliance must still remediate all 4 non-KYC accounts.
-
-### 3. Finance
-
-- **Fee errors run in both directions and cancel out.** About £587 is under-collected (78% of the £750 expected fees) while a similar amount is overcharged, so net revenue (£750.17 vs £750.00 expected) hides the errors.
-- **Transfer - International accounts for the largest fee variance (-£400)** and contributes disproportionately to fee leakage.
-- **ATM Withdrawals and Crypto Purchases also deviate from expected fees** (consistently under-collected).
-- **Business customers generate the highest fee revenue per transaction (£0.90 - £1.20).**
-
-### 4. Product
-
-- **The failure rate is about 60% across the board, consistent across every channel and failure type.** For a real bank this level would be unacceptable (likely an artefact of the synthetic data).
-- **Failure is highest for recurring and automated types** (Card Refund, Loan Repayment, Standing Order at about 75%).
-
-## V. Recommendations
-
-1. **Investigate the London fraud cluster** (60% fraud rate, 225 flagged), starting with Rajan Mehta, the highest-exposure customer.
-2. **Recover and correct fee leakage.** Recover £587 in under-collected fees (78% of expected fee revenue), and refund overcharges. Investigate International Transfers first (-£400).
-3. **Review fee configuration** for Transfer - International, ATM Withdrawals, and Crypto Purchases, where actual fees consistently deviate from expected fees.
-4. **Investigate the root cause of the platform-wide failure rate (about 60%),** starting with Card Refund, Loan Repayment, and Standing Order. Analyse `failed_reason` to determine whether failures stem from insufficient funds, fraud rules, or system processing errors, and review the shared transaction processing flow, since failures are not confined to a single channel.
-5. **Re-tier merchant risk ratings** using observed fraud rates, since declared `risk_flag` does not predict actual fraud.
-6. **Remediate all 4 non-KYC accounts,** regardless of their 0% observed fraud rate.
-7. **Prioritise Business customers for premium products,** as they generate the highest fee revenue per transaction.
+| Insight | Recommendation |
+|---|---|
+| London accounts for 60% of fraud flags (225 flagged transactions). The nine largest flagged transactions belong to one Premium customer, Rajan Mehta, with repeated amounts. | Investigate the London fraud cluster, starting with Rajan Mehta, the highest-exposure customer. |
+| Fee errors run in both directions and cancel out. About £587 is under-collected (78% of the £750 expected fees) while a similar amount is overcharged, so net revenue hides the errors. | Recover the £587 in under-collected fees and refund overcharges. Start with International Transfers (-£400). |
+| Transfer - International has the largest fee variance (-£400). ATM Withdrawals and Crypto Purchases are also consistently under-collected. | Review fee configuration for Transfer - International, ATM Withdrawals and Crypto Purchases. |
+| Failure rate is about 60% across every channel and failure type, highest for Card Refund, Loan Repayment and Standing Order (about 75%). | Investigate the root cause of the platform-wide failure rate, starting with those three types. Analyse `failed_reason` (insufficient funds, fraud rules or system errors) and review the shared transaction processing flow. |
+| Declared `risk_flag` labels do not match actual fraud outcomes: High 19.9%, Medium 22.3%, Low 19.0%. Nine merchant categories sit at about 29-31% fraud rate. | Re-tier merchant risk ratings using observed fraud rates. |
+| Only 4 customers are unverified, and their 0% fraud rate is not statistically significant. | Remediate all 4 non-KYC accounts, regardless of the 0% observed fraud rate. |
+| Business customers generate the highest fee revenue per transaction (£0.90 - £1.20). | Prioritise Business customers for premium products. |
 
 ## Tech Stack
 
