@@ -128,21 +128,19 @@ Build a decision-making dashboard to:
 
 ### Step 1: Empathize
 
-Four stakeholder groups: **Risk** (where is fraud concentrated), **Finance** (is fee revenue correct), **Product** (where do transactions fail), **Compliance** (is KYC working).
+<img width="2045" height="769" alt="Designer" src="https://github.com/user-attachments/assets/ac7c3405-c276-4422-be27-d9bf2a24ea96" />
 
 ### Step 2: Define POV
 
-North star metrics
+<img width="1769" height="889" alt="Designer (1)" src="https://github.com/user-attachments/assets/aebb6c4d-5eb7-4df6-86a7-7b432159c212" />
+<img width="1330" height="1183" alt="Designer (2)" src="https://github.com/user-attachments/assets/5a2bbf49-deda-4176-a5ee-26ed2dd4d849" />
 
-| Area | Metrics |
-|---|---|
-| Transaction health | Total Transaction, Transaction Value, Completion Rate, Failed Rate (Declined + Reversed) |
-| Fraud and risk | Fraud Flag Rate |
-| Revenue health | Fee Revenue, Revenue Leakage |
+
 
 ### Step 3: Ideate
 
-Five report pages: Executive Overview (bank pulse), Risk (where fraud sits), Finance (fee revenue and leakage), Product (channels, devices, failures), Customer Investigation (drill-through to one customer).
+<img width="2085" height="754" alt="Designer (3)" src="https://github.com/user-attachments/assets/f62ba070-345f-4ed2-b8e3-363ca4038706" />
+
 
 ### Step 4: Prototype and Review
 
