@@ -2,22 +2,24 @@
 
 **Power BI dashboard** analyzing transaction health, fraud exposure, and fee revenue for a fictional UK neobank, built for Risk, Finance, Product, and Compliance teams.
 
-**Problem to Be Solved**
-  Build a decision-making dashboard to:
+### 2. Problem to Be Solved
 
-Monitor transaction health (Total Transaction, Trnsaction Value, Completion, Failed rates)
-Locate fraud exposure by segment, merchant category, customer, and time
-Detect fee billing errors (under-collection and overcharging)
-Check whether declared risk ratings match actual fraud outcomes
-  Key questions
+Build a decision-making dashboard to:
 
-How have transaction volume and value trended month-on-month?
-Which customer segments drive the highest volumes and values?
-What share of transactions is flagged as fraud, and how does it vary by merchant category?
-Does the declared risk_flag align with actual fraud events?
-Are fees applied consistently, or is there leakage and overcharging?
-Which channels, devices, and transaction types fail most?
-Which individual customers generate outsized risk?
+- Monitor transaction health (Total Transaction, Trnsaction Value, Completion, Failed rates)
+- Locate fraud exposure by segment, merchant category, customer, and time
+- Detect fee billing errors (under-collection and overcharging)
+- Check whether declared risk ratings match actual fraud outcomes
+
+**Key questions**
+
+- How have transaction volume and value trended month-on-month?
+- Which customer segments drive the highest volumes and values?
+- What share of transactions is flagged as fraud, and how does it vary by merchant category?
+- Does the declared `risk_flag` align with actual fraud events?
+- Are fees applied consistently, or is there leakage and overcharging?
+- Which channels, devices, and transaction types fail most?
+- Which individual customers generate outsized risk?
 
 ## Table of Contents
 
@@ -161,6 +163,14 @@ Chart types matched to each question: line charts for trends, bar charts for mut
 
 <img width="1423" height="732" alt="image" src="https://github.com/user-attachments/assets/736fcfab-5504-42ef-acb3-b2e93647bd84" />
 
+**Insights**
+
+- Transaction value increased 48.4% versus April, driven by higher activity among Standard clients.
+- Monthly transaction count is stable between 279 and 322, and the status mix is consistent across months.
+- Premium drives the highest transaction value (63% of the total).
+- The Automated channel leads with 42.83% of total transaction value, followed by Mobile App at 35.5%.
+- London accounts for 60% of all fraud flags.
+- Only 4 customers are currently unverified. Results are not statistically significant, and a 0% fraud rate among non-KYC customers does not mean low risk. Compliance must still remediate all 4 non-KYC accounts.
 
 ### Risk
 
@@ -175,6 +185,15 @@ Chart types matched to each question: line charts for trends, bar charts for mut
 
 <img width="1250" height="707" alt="image" src="https://github.com/user-attachments/assets/da7ea52a-c01f-43ea-b072-b0cfbf0f0d6a" />
 
+**Insights**
+
+- Fraud rate is steady at about 20% (300 flagged transactions), with a dip in April (about 13%) and a rebound in May (about 23%).
+- Premium has the highest fraud rate (40%) and also 63% of value, so it carries the largest exposure.
+- Nine merchant categories sit at about 29-31% fraud rate. Gambling is no worse than Fuel or Electronics.
+- Declared `risk_flag` labels are misaligned with actual fraud outcomes: High 19.9%, Medium 22.3%, Low 19.0%.
+- Half of flagged transactions come from Unknown device.
+- There is no strong day or time pattern. Only Monday morning (38%) and Friday evening (36%) stand out, and small cell sizes make even these tentative.
+
 ### Fee Revenue and Leakage 
 
 *Are we collecting the right fees?*
@@ -187,6 +206,11 @@ Chart types matched to each question: line charts for trends, bar charts for mut
 
 <img width="1243" height="742" alt="image" src="https://github.com/user-attachments/assets/b50647ce-2539-4d36-8ea1-f8a54103d05e" />
 
+**Insights**
+
+- Fee errors run in both directions and cancel out. About £587 is under-collected (78% of the £750 expected fees) while a similar amount is overcharged, so net revenue (£750.17 against £750.00 expected) hides the errors.
+- Transfer - International has the largest fee variance (-£400) and contributes disproportionately to fee leakage. ATM Withdrawals (-£88) and Crypto Purchases (-£37) are also under-collected.
+- Business customers generate the highest fee revenue per transaction (£0.90 - £1.20).
 ### Product and Operation
 
 *Where do transactions fail?*
@@ -199,11 +223,23 @@ Chart types matched to each question: line charts for trends, bar charts for mut
 
 <img width="1247" height="675" alt="image" src="https://github.com/user-attachments/assets/fd985429-01ea-4941-baec-7de3680bec37" />
 
+**Insights**
+
+- The failure rate is about 60% across the board, consistent across every channel (58% to 63%) and failure type. For a real bank this level would be unacceptable.
+- Card Refund, Loan Repayment and Standing Order fail most (about 75%). Direct Debit, Salary Credit, Savings Pot Transfer and Transfer - Outbound sit lowest at 50%.
+- Failures split about 60% Declined and 40% Reversed in every channel, so no channel leans toward one failure type.
+- Business customers use mainly Unknown device (75%) and Web (25%), while Starter splits evenly between iOS and Android.
+
 ### Customer Investigation
 
 Drill-through page: review one customer's transactions, flags, fees, and status in every dimension.
 
 <img width="1255" height="692" alt="image" src="https://github.com/user-attachments/assets/11e5fe45-22e5-4f73-b48a-cddf6f78ac7b" />
+
+**Insights**
+
+- Rajan Mehta (Premium) generates the most risk. The nine largest flagged transactions all belong to this customer, are all Reversed, and repeat the same amounts (£17,273 six times, £16,818 three times).
+- These nine transactions total about £154K, roughly 13% of the £1.19M fraud exposure, from a single customer.
 
 ## IV. Insight and Recommendation
 
