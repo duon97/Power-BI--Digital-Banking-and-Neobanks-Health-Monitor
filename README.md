@@ -2,7 +2,7 @@
 
 **Power BI dashboard** analyzing transaction health, fraud exposure, and fee revenue for a fictional UK neobank, built for Risk, Finance, Product, and Compliance teams.
 
-### 2. Problem to Be Solved
+### Problem to Be Solved
 
 Build a decision-making dashboard to:
 
@@ -104,25 +104,6 @@ erDiagram
 | dim_customer | 20 | customer_segment (Starter, Standard, Premium, Business), region, age_band, kyc_verified, account_open_date |
 | dim_transaction_type | 15 | type_name, channel (Mobile App, Web Browser, ATM Network, Automated), is_domestic, typical_fee_gbp |
 | dim_merchant_category | 18 | category_name, sector, risk_flag (Low, Medium, High) |
-
-### 2. Problem to Be Solved
-
-Build a decision-making dashboard to:
-
-- Monitor transaction health (Total Transaction, Trnsaction Value, Completion, Failed rates)
-- Locate fraud exposure by segment, merchant category, customer, and time
-- Detect fee billing errors (under-collection and overcharging)
-- Check whether declared risk ratings match actual fraud outcomes
-
-**Key questions**
-
-- How have transaction volume and value trended month-on-month?
-- Which customer segments drive the highest volumes and values?
-- What share of transactions is flagged as fraud, and how does it vary by merchant category?
-- Does the declared `risk_flag` align with actual fraud events?
-- Are fees applied consistently, or is there leakage and overcharging?
-- Which channels, devices, and transaction types fail most?
-- Which individual customers generate outsized risk?
 
 ## II. Design Thinking
 
